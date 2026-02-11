@@ -1,8 +1,8 @@
 {
-  "name": "@micoirvin/webflow-dev-starter",
-  "version": "1.0.2",
+  "name": "@micoirvin/vovi-wf-scene",
+  "version": "1.0.0",
   "description": "Developer starter template for Webflow projects, based from Finsweet's open-source developer starter.",
-  "homepage": "https://github.com/micoirvin/webflow-dev-starter#readme",
+  "homepage": "https://github.com/micoirvin/vovi-wf-scene#readme",
   "license": "ISC",
   "keywords": [],
   "author": {
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micoirvin/webflow-dev-starter.git"
+    "url": "git+https://github.com/micoirvin/vovi-wf-scene.git"
   },
   "bugs": {
-    "url": "https://github.com/micoirvin/webflow-dev-starter/issues"
+    "url": "https://github.com/micoirvin/vovi-wf-scene/issues"
   },
   "type": "module",
   "main": "src/index.ts",

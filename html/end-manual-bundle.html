@@ -1,0 +1,61 @@
+<script>
+  var LOCAL_SCRIPT = 'http://localhost:3000/index.js';
+  var LIVE_SCRIPT = {
+    init() {
+      console.log('init');
+      this.basicTabs();
+      this.func2();
+    },
+    basicTabs() {
+      document.querySelectorAll('[tabs]').forEach((tabs) => {
+        const tabButtons = tabs.querySelectorAll('[tabs-button]');
+        const tabItems = tabs.querySelectorAll('[tabs-item]');
+
+        tabButtons.forEach((button, index) => {
+          button.addEventListener('click', () => {
+            tabButtons.forEach((btn, i) => {
+              if (i === index) return;
+              btn.classList.remove('is-active');
+              btn.classList.add('is-inactive');
+            });
+            tabItems.forEach((item, i) => {
+              if (i === index) return;
+              item.classList.remove('is-active');
+              item.classList.add('is-inactive');
+            });
+            button.classList.add('is-active');
+            button.classList.remove('is-inactive');
+            tabItems[index].classList.add('is-active');
+            tabItems[index].classList.remove('is-inactive');
+          });
+        });
+      });
+    },
+    func2() {},
+  };
+
+  function controlScripts(control = true) {
+    if (!control) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const devMode = urlParams.get('devMode');
+    const pageLinks = document.querySelectorAll('a');
+
+    if (devMode === 'true') {
+      const devScript = document.createElement('script');
+      devScript.setAttribute('async', '');
+      devScript.setAttribute('crossorigin', '');
+      devScript.setAttribute('type', 'module');
+      devScript.setAttribute('src', LOCAL_SCRIPT);
+      document.body.append(devScript);
+
+      pageLinks.forEach((link) => {
+        const url = link.href;
+        const updatedUrl = url + '?devMode=true';
+        link.href = updatedUrl;
+      });
+    } else {
+      LIVE_SCRIPT.init();
+    }
+  }
+  controlScripts();
+</script>

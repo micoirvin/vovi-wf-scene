@@ -1,0 +1,39 @@
+<script>
+  var LOCAL_SCRIPT = 'http://localhost:3000/index.js';
+  var LIVE_SCRIPT = {
+    init() {
+      console.log('init');
+      this.func1();
+      this.func2();
+    },
+    func1() {
+      console.log('func1');
+    },
+    func2() {},
+  };
+
+  function controlScripts(control = true) {
+    if (!control) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const devMode = urlParams.get('devMode');
+    const pageLinks = document.querySelectorAll('a');
+
+    if (devMode === 'true') {
+      const devScript = document.createElement('script');
+      devScript.setAttribute('async', '');
+      devScript.setAttribute('crossorigin', '');
+      devScript.setAttribute('type', 'module');
+      devScript.setAttribute('src', LOCAL_SCRIPT);
+      document.body.append(devScript);
+
+      pageLinks.forEach((link) => {
+        const url = link.href;
+        const updatedUrl = url + '?devMode=true';
+        link.href = updatedUrl;
+      });
+    } else {
+      LIVE_SCRIPT.init();
+    }
+  }
+  controlScripts();
+</script>
