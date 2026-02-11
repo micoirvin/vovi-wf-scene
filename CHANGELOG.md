@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.1
+
+### Patch Changes
+
+- dc010cd: First Commit
+
 ## 1.0.2
 
 ### Patch Changes
