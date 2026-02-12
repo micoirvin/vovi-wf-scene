@@ -3,6 +3,7 @@ import { loadScript } from './loadScript';
 import { lazyFunc } from './lazy';
 
 function lazySwiper() {
+  if (window.Swiper) return handleSwiperSliders();
   const swiperOuters = document.querySelectorAll('[swiper_outer]');
   lazyFunc(swiperOuters, () => {
     loadScript('https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js')

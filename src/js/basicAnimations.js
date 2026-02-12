@@ -22,9 +22,7 @@ function basicAnimations() {
           x: '0rem',
           opacity: 1,
           autoAlpha: 1,
-          duration:
-            parseFloat(element.getAttribute('data-duration')) ||
-            defaultDuration,
+          duration: parseFloat(element.getAttribute('data-duration')) || defaultDuration,
           delay: parseFloat(element.getAttribute('data-delay')) || 0.15,
           stagger: {
             each: parseFloat(element.getAttribute('stagger-amount')) || 0.3,
@@ -32,6 +30,7 @@ function basicAnimations() {
           },
           ease: element.getAttribute('data-easing') || defaultEase,
           overwrite: true,
+          clearProps: 'all',
         });
       },
     });
@@ -45,8 +44,7 @@ function basicAnimations() {
       {
         y: '0rem',
         opacity: 1,
-        duration:
-          parseFloat(element.getAttribute('data-duration')) || defaultDuration,
+        duration: parseFloat(element.getAttribute('data-duration')) || defaultDuration,
         delay: parseFloat(element.getAttribute('data-delay')) || 0.15,
         ease: element.getAttribute('data-easing') || defaultEase,
         scrollTrigger: {
@@ -54,7 +52,8 @@ function basicAnimations() {
           start: element.getAttribute('scrollTrigger-start') || 'top 80%',
           markers: element.getAttribute('anim-markers') === 'true',
         },
-      },
+        clearProps: 'all',
+      }
     );
   });
 
@@ -74,7 +73,7 @@ function basicAnimations() {
           start: 'top 80%',
           markers: false,
         },
-      },
+      }
     );
   });
 }

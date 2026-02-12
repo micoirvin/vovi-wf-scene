@@ -11,7 +11,11 @@ function loadScript(src, attrs = []) {
     s.onload = resolve;
     s.onerror = reject;
     attrs.forEach(([name, value]) => {
-      s[name] = value;
+      if (name === 'async') s.async = value;
+      else if (name === 'defer') s.defer = value;
+      else {
+        s.setAttribute(name, value);
+      }
     });
     document.head.appendChild(s);
   });
