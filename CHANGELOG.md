@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.2
+
+### Patch Changes
+
+- 04a8d76: Barba and Finsweet basic handling part 1
+
 ## 1.0.1
 
 ### Patch Changes
