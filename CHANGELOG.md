@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.3
+
+### Patch Changes
+
+- e13e748: sidebar
+
 ## 1.0.2
 
 ### Patch Changes
