@@ -1,5 +1,5 @@
 <style>
-  html,
+  body > *,
   [data-anim-rotate],
   [data-anim-opacity],
   [data-anim],
@@ -11,7 +11,7 @@
       transform 1s var(--ease);
   }
 
-  html:not(.ready) {
+  html:not(.ready) body > * {
     opacity: 0;
   }
   html:not(.ready) [data-anim-opacity] {
