@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.4
+
+### Patch Changes
+
+- 098bfb1: Contact page interactions
+
 ## 1.0.3
 
 ### Patch Changes
