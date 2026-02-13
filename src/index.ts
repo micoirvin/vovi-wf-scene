@@ -1,6 +1,7 @@
 import { greetUser } from '$utils/greet';
 import { init } from './js/_init';
 import { sidebar } from './js/sidebar';
+import { cycleClock } from './js/cycleClock';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -9,6 +10,7 @@ window.Webflow.push(() => {
   console.log(`Welcome to Webflow, ${name}!`);
   document.documentElement.classList.add('ready');
 
+  cycleClock();
   sidebar();
   init();
 });

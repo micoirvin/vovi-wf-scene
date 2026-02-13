@@ -7,3 +7,4 @@
 - tabs flash
 - proper delay on .ready
 - cleanup especially of eventlisteners
+- animations when using browser navigation

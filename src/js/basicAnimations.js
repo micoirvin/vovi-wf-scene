@@ -1,4 +1,5 @@
 function basicAnimations() {
+  ScrollTrigger.refresh();
   const defaultEase = 'sine.out';
   const defaultDuration = 1;
   // 1. Stagger Animations

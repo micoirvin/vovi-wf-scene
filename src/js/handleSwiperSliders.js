@@ -19,18 +19,27 @@ function handleSwiperSliders() {
     const nextEl = swiperOuter.querySelector('[swiper-button-next]') ?? null;
     const prevEl = swiperOuter.querySelector('[swiper-button-prev]') ?? null;
 
-    const isLoop = swiperEl?.hasAttribute('swiper-prop-loop') || false;
+    const isLoop = swiperEl?.hasAttribute('swiper-loop') || false;
 
-    const gap = getComputedStyle(swiperWrapper).getPropertyValue('gap');
-    if (gap) {
-      swiperSlides.forEach((slide) => {
-        slide.style.marginRight = gap;
-      });
-    }
-    swiperWrapper.style.gap = '0px';
+    const scrollbarEl = swiperOuter.querySelector('[swiper-scrollbar]') ?? false;
+    const direction = swiperEl?.getAttribute('swiper-direction') ?? 'horizontal';
+
+    let gap = 0;
+    if (!swiperWrapper.hasAttribute('swiper-copied-gap')) {
+      gap = getComputedStyle(swiperWrapper).getPropertyValue('gap');
+      if (gap) {
+        swiperWrapper.setAttribute('swiper-copied-gap', gap);
+        swiperSlides.forEach((slide) => {
+          if (direction === 'horizontal') slide.style.marginRight = gap;
+          else slide.style.marginBottom = gap;
+        });
+      }
+      swiperWrapper.style.gap = '0px';
+    } else gap = swiperWrapper.getAttribute('swiper-copied-gap');
 
     const swiperProps = {
       loop: isLoop,
+      direction: direction,
       speed: 600,
       slidesPerView: 'auto',
       grabCursor: true,
@@ -40,6 +49,13 @@ function handleSwiperSliders() {
         prevEl: prevEl,
         nextEl: nextEl,
       },
+      scrollbar: scrollbarEl
+        ? {
+            el: scrollbarEl,
+            draggable: true,
+            snapOnRelease: false,
+          }
+        : false,
     };
 
     switch (swiperType) {
@@ -89,6 +105,9 @@ const addClassesToSwiperElements = (swiperOuter) => {
   swiperEl.classList.add('swiper');
   swiperWrapper?.classList.add('swiper-wrapper');
   swiperSlides.forEach((s) => s.classList.add('swiper-slide'));
+
+  const scrollbarDrag = swiperOuter.querySelector('[swiper-scrollbar-drag]');
+  if (scrollbarDrag) scrollbarDrag.classList.add('swiper-scrollbar-drag');
 
   return {
     swiperEl,
