@@ -1,0 +1,189 @@
+/* Figma Design on 1728px */
+:root {
+  --font-from: 37.04;
+  --font-to: 37.04;
+  --vw-from: calc(4000 / 100);
+  --vw-to: calc(6272 / 100);
+  --coefficient: calc(
+    (var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from))
+  );
+  --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16);
+}
+html {
+  font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw);
+}
+@media screen and (max-width: 4000px) {
+  :root {
+    --font-from: 16;
+    --font-to: 37.04;
+    --vw-from: calc(1728 / 100);
+    --vw-to: calc(4000 / 100);
+  }
+}
+@media screen and (max-width: 1728px) {
+  :root {
+    --font-from: 9.17;
+    --font-to: 16;
+    --vw-from: calc(990 / 100);
+    --vw-to: calc(1728 / 100);
+  }
+}
+@media screen and (max-width: 990px) {
+  :root {
+    --font-from: 12.4;
+    --font-to: 16;
+    --vw-from: calc(767 / 100);
+    --vw-to: calc(990 / 100);
+  }
+}
+@media screen and (max-width: 767px) {
+  :root {
+    --font-from: 16;
+    --font-to: 27.89;
+    --vw-from: calc(440 / 100);
+    --vw-to: calc(767 / 100);
+  }
+}
+@media screen and (max-width: 440px) {
+  :root {
+    --font-from: 8.73;
+    --font-to: 16;
+    --vw-from: calc(240 / 100);
+    --vw-to: calc(440 / 100);
+  }
+}
+@media screen and (max-width: 240px) {
+  :root {
+    --font-from: 0;
+    --font-to: 8.73;
+    --vw-from: calc(1 / 100);
+    --vw-to: calc(240 / 100);
+  }
+}
+/* Ease */
+:root {
+  --ease: cubic-bezier(0.22, 0.6, 0.36, 1);
+  --ease2: cubic-bezier(0.87, 0, 0.13, 1);
+}
+/* Global */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img {
+  user-select: none;
+}
+.height-fill {
+  height: 100%;
+}
+[no-scrollbar]::-webkit-scrollbar {
+  width: 0px;
+}
+[text-style-4lines] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+[text-style-3lines] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+[text-style-2lines] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+[text-style-1line] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.padding-bottom-0 {
+  padding-bottom: 0rem !important;
+}
+.padding-top-0 {
+  padding-top: 0rem !important;
+}
+.button:hover {
+  transition-delay: 0ms !important;
+}
+.w-richtext > :first-child {
+  margin-top: 0;
+}
+.w-richtext > :last-child,
+.w-richtext ol li:last-child,
+.w-richtext ul li:last-child {
+  margin-bottom: 0;
+}
+.w-richtext figure {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
+}
+.w-richtext figure > div {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+.hide {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+  .hide,
+  .hide-tablet {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .hide-mobile-landscape,
+  [hide-mobile='1'] {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  [for-mobile='1'] {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 479px) {
+  .hide-mobile,
+  [hide-mobile-p='1'] {
+    display: none !important;
+  }
+}
+[text-pretty] {
+  text-wrap: pretty;
+}
+[text-balance] {
+  text-wrap: balance;
+}
+[text-stable] {
+  text-wrap: stable;
+}
+[text-nowrap] {
+  white-space: nowrap;
+}
+[text-break] {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+/* Marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+[marquee] {
+  animation: marquee 40s linear infinite;
+}

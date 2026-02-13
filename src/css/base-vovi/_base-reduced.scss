@@ -1,0 +1,58 @@
+a {
+  font-size: inherit;
+  color: inherit;
+}
+
+.w-nav:before,
+.w-nav:after {
+  display: none;
+}
+
+/* Accessibility */
+.sr-only,
+.label-hide {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+  color: #000;
+}
+
+.w-embed.svg-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.responsive-iframe-wrap {
+  position: relative;
+}
+
+.responsive-iframe-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+}
+
+body {
+  text-wrap: pretty;
+}
+
+.w-pagination-wrapper a {
+  margin: 0;
+}
