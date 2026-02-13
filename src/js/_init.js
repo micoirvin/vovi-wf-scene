@@ -3,6 +3,8 @@ import { lazySwiper } from './lazySwiper';
 import { gsapLoader } from './gsapLoader';
 import { barbaLoader } from './barbaLoader';
 import { lazyFinsweet } from './lazyFinsweet';
+import { globeInteraction } from './globeInteraction';
+import { enableSubmitButton } from './enableButtonSubmit';
 
 function init() {
   gsapLoader();
@@ -10,6 +12,8 @@ function init() {
   basicTabs();
   lazySwiper();
   lazyFinsweet();
+  globeInteraction();
+  enableSubmitButton();
 }
 
 export { init };
