@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.5
+
+### Patch Changes
+
+- 3a02439: Sidebar CS, Time
+
 ## 1.0.4
 
 ### Patch Changes
