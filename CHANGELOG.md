@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.7
+
+### Patch Changes
+
+- e1039af: sidebar mobile
+
 ## 1.0.6
 
 ### Patch Changes
