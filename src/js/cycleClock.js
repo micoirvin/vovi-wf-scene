@@ -21,7 +21,6 @@ function cycleClock() {
     };
     let formatter = new Intl.DateTimeFormat([], options);
     const date = formatter.format(new Date());
-    console.log(date);
 
     const update = () => {
       locEl.innerText = loc;

@@ -4,9 +4,7 @@
   --font-to: 37.04;
   --vw-from: calc(4000 / 100);
   --vw-to: calc(6272 / 100);
-  --coefficient: calc(
-    (var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from))
-  );
+  --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));
   --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16);
 }
 html {
@@ -24,16 +22,16 @@ html {
   :root {
     --font-from: 9.17;
     --font-to: 16;
-    --vw-from: calc(990 / 100);
+    --vw-from: calc(992 / 100);
     --vw-to: calc(1728 / 100);
   }
 }
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
   :root {
     --font-from: 12.4;
-    --font-to: 16;
-    --vw-from: calc(767 / 100);
-    --vw-to: calc(990 / 100);
+    --font-to: 14.4;
+    --vw-from: calc(768 / 100);
+    --vw-to: calc(992 / 100);
   }
 }
 @media screen and (max-width: 767px) {
@@ -41,7 +39,7 @@ html {
     --font-from: 16;
     --font-to: 27.89;
     --vw-from: calc(440 / 100);
-    --vw-to: calc(767 / 100);
+    --vw-to: calc(768 / 100);
   }
 }
 @media screen and (max-width: 440px) {
