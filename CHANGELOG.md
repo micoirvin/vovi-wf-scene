@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.6
+
+### Patch Changes
+
+- ed08a1d: Dropdown and a few cleanup
+
 ## 1.0.5
 
 ### Patch Changes
