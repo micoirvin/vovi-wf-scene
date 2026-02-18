@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.8
+
+### Patch Changes
+
+- 6b6766e: finsweet + swiper compat
+
 ## 1.0.7
 
 ### Patch Changes
