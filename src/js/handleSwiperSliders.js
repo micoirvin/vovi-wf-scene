@@ -1,100 +1,102 @@
 function handleSwiperSliders() {
-  const swiperOuterControllables = document.querySelectorAll('[swiper_outer_controllable]');
-
-  swiperOuterControllables.forEach((swiperOuter) => {
-    addClassesToSwiperElements(swiperOuter);
-  });
-
   const swiperOuters = document.querySelectorAll('[swiper_outer]');
+  swiperOuters.forEach((swiperOuter) => handleSingleSwiper(swiperOuter));
+}
 
-  swiperOuters.forEach((swiperOuter) => {
-    const swiperEls = addClassesToSwiperElements(swiperOuter);
-    if (!swiperEls) return;
-    const { swiperEl, swiperWrapper, swiperSlides } = swiperEls;
+function handleSingleSwiper(swiperOuter, reload = false) {
+  let swiperEls = addClassesToSwiperElements(swiperOuter);
+  if (!swiperEls) return;
+  let { swiperEl, swiperWrapper, swiperSlides } = swiperEls;
 
-    const isController = swiperEl?.hasAttribute('swiper-controller');
+  if (swiperEl.swiper && !reload) {
+    return console.warn('Swiper for el', swiperEl, 'has been initialized already ');
+  }
 
-    const swiperType = swiperEl.getAttribute('swiper-type') || 'default';
+  if (
+    swiperEl.hasAttribute('dynamic-swiper-list') &&
+    !swiperOuter.hasAttribute('dynamic-swiper-list-is-initialized')
+  ) {
+    swiperOuter = dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper);
+    swiperEls = addClassesToSwiperElements(swiperOuter);
+    swiperEl = swiperEls.swiperEl;
+    swiperWrapper = swiperEls.swiperWrapper;
+  }
 
-    const nextEl = swiperOuter.querySelector('[swiper-button-next]') ?? null;
-    const prevEl = swiperOuter.querySelector('[swiper-button-prev]') ?? null;
+  const swiperType = swiperEl.getAttribute('swiper-type') || 'default';
 
-    const isLoop = swiperEl?.hasAttribute('swiper-loop') || false;
+  const nextEl = swiperOuter.querySelector('[swiper-button-next]') ?? null;
+  const prevEl = swiperOuter.querySelector('[swiper-button-prev]') ?? null;
 
-    const scrollbarEl = swiperOuter.querySelector('[swiper-scrollbar]') ?? false;
-    const direction = swiperEl?.getAttribute('swiper-direction') ?? 'horizontal';
+  const isLoop = swiperEl?.hasAttribute('swiper-loop') || false;
 
-    let gap = 0;
-    if (!swiperWrapper.hasAttribute('swiper-copied-gap')) {
-      gap = getComputedStyle(swiperWrapper).getPropertyValue('gap');
-      if (gap) {
-        swiperWrapper.setAttribute('swiper-copied-gap', gap);
-        swiperSlides.forEach((slide) => {
-          if (direction === 'horizontal') slide.style.marginRight = gap;
-          else slide.style.marginBottom = gap;
-        });
-      }
-      swiperWrapper.style.gap = '0px';
-    } else gap = swiperWrapper.getAttribute('swiper-copied-gap');
+  const scrollbarEl = swiperOuter.querySelector('[swiper-scrollbar]') ?? false;
+  const direction = swiperEl?.getAttribute('swiper-direction') ?? 'horizontal';
 
-    const swiperProps = {
-      loop: isLoop,
-      direction: direction,
-      speed: 600,
-      slidesPerView: 'auto',
-      grabCursor: true,
-      watchSlidesProgress: false,
-      spaceBetween: gap,
-      navigation: {
-        prevEl: prevEl,
-        nextEl: nextEl,
-      },
-      scrollbar: scrollbarEl
-        ? {
-            el: scrollbarEl,
-            draggable: true,
-            snapOnRelease: false,
-          }
-        : false,
-    };
-
-    switch (swiperType) {
-      case 'default':
-        // as is
-        break;
-      case 'auto':
-        swiperProps.effect = 'fade';
-        swiperProps.fadeEffect = {
-          crossFade: true,
-        };
-        swiperProps.autoplay = {
-          delay: 600,
-          disableOnInteraction: false,
-        };
-        swiperProps.grabCursor = false;
-        break;
-      case 'scale':
-        swiperProps.centeredSlides = true;
-        swiperProps.effect = 'creative';
-        swiperProps.creativeEffect = {
-          prev: {
-            translate: ['-90%', 0, 0],
-            scale: 0.8,
-          },
-          next: {
-            translate: ['90%', 0, 0],
-            scale: 0.8,
-          },
-          limitProgress: 1,
-        };
+  let gap = 0;
+  if (!swiperWrapper.hasAttribute('swiper-copied-gap')) {
+    gap = getComputedStyle(swiperWrapper).getPropertyValue('gap');
+    if (gap) {
+      swiperWrapper.setAttribute('swiper-copied-gap', gap);
     }
+    swiperWrapper.style.gap = '0px';
+  } else gap = swiperWrapper.getAttribute('swiper-copied-gap');
 
-    const swiper = new Swiper(swiperEl, swiperProps);
+  swiperWrapper.style.gap = 0;
 
-    if (swiper && isController) {
-      handleControllableSwiper(swiperEl, swiper, swiperProps);
-    }
-  });
+  const swiperProps = {
+    loop: isLoop,
+    direction: direction,
+    speed: 600,
+    slidesPerView: 'auto',
+    grabCursor: true,
+    watchSlidesProgress: false,
+    spaceBetween: gap,
+    navigation: {
+      prevEl: prevEl,
+      nextEl: nextEl,
+    },
+    scrollbar: scrollbarEl
+      ? {
+          el: scrollbarEl,
+          draggable: true,
+          snapOnRelease: false,
+        }
+      : false,
+  };
+
+  switch (swiperType) {
+    case 'default':
+      // as is
+      break;
+    case 'auto':
+      swiperProps.effect = 'fade';
+      swiperProps.fadeEffect = {
+        crossFade: true,
+      };
+      swiperProps.autoplay = {
+        delay: 600,
+        disableOnInteraction: false,
+      };
+      swiperProps.grabCursor = false;
+      break;
+    case 'scale':
+      swiperProps.centeredSlides = true;
+      swiperProps.effect = 'creative';
+      swiperProps.creativeEffect = {
+        prev: {
+          translate: ['-90%', 0, 0],
+          scale: 0.8,
+        },
+        next: {
+          translate: ['90%', 0, 0],
+          scale: 0.8,
+        },
+        limitProgress: 1,
+      };
+  }
+
+  if (swiperEl.swiper) swiperEl.swiper.destroy();
+  let swiper = new Swiper(swiperEl, swiperProps);
 }
 
 const addClassesToSwiperElements = (swiperOuter) => {
@@ -116,24 +118,69 @@ const addClassesToSwiperElements = (swiperOuter) => {
   };
 };
 
-const handleControllableSwiper = (swiperEl, swiper, swiperProps) => {
-  const controlId = swiperEl.getAttribute('swiper-control-id');
-  if (!controlId) return;
-  const syncedSwiper = document.querySelector(
-    `[swiper-controllable][swiper-control-id="${controlId}"]`
-  );
-  if (!syncedSwiper) return;
+function dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper) {
+  const displayClone = swiperOuter.cloneNode(true);
+  const key = swiperEl.getAttribute('dynamic-swiper-list');
+  attributeCleanupMap(key, displayClone)();
 
-  swiperProps.effect = 'fade';
-  swiperProps.fadeEffect = {
-    crossFade: true,
-  };
-  swiperProps.grabCursor = false;
-  swiperProps.disableOnInteraction = false;
+  displayClone.setAttribute('dynamic-swiper-list-is-initialized', '');
+  displayClone.setAttribute('dynamic-swiper-list-dest', '');
 
-  const controllableSwiper = new Swiper(syncedSwiper, swiperProps);
+  swiperOuter.style.display = 'none';
+  swiperOuter.setAttribute('dynamic-swiper-list-source', '');
+  swiperOuter.insertAdjacentElement('afterend', displayClone);
+  swiperOuter.removeAttribute('swiper_outer');
 
-  swiper.controller.control = controllableSwiper;
-};
+  swiperEl.removeAttribute('swiper');
+  swiperEl.classList.remove('swiper');
+
+  let timeout = null;
+  const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          console.log('changed slides');
+          const wrapper = displayClone.querySelector('[swiper-wrapper]');
+          const newWrapper = swiperWrapper.cloneNode(true);
+          attributeCleanupMap(key, newWrapper)();
+          wrapper?.replaceWith(newWrapper);
+          handleSingleSwiper(displayClone, true);
+          clearTimeout(timeout);
+        }, 300);
+      }
+    }
+  });
+  observer.observe(swiperWrapper, {
+    childList: true, // watch for direct children changes only
+    subtree: false, // watch for direct children changes only
+  });
+
+  return displayClone;
+}
+
+function attributeCleanupMap(key, swiperEl) {
+  let retFunc = null;
+  switch (key) {
+    case 'fs':
+      retFunc = () => {
+        const attributes = ['fs-list-element', 'fs-list-instance', 'fs-list-field'];
+        const strAttributes = attributes
+          .map((val) => `[${val}]`)
+          .reduce((acc, val) => acc + ', ' + val);
+        const els = swiperEl.querySelectorAll(strAttributes);
+        attributes.forEach((att) => {
+          if (swiperEl.hasAttribute(att)) swiperEl.removeAttribute(att);
+          els.forEach((el) => {
+            if (el.hasAttribute(att)) el.removeAttribute(att);
+          });
+        });
+      };
+      break;
+    default:
+      retFunc = () => {};
+  }
+  return retFunc;
+}
 
 export { handleSwiperSliders };

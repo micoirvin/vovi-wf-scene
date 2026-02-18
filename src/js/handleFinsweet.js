@@ -1,5 +1,5 @@
 function handleFinsweet() {
-  window.FinsweetAttributes.destroy();
+  // window.FinsweetAttributes.destroy(); // NO NEED??
   window.FinsweetAttributes.load('list');
 }
 
