@@ -8,7 +8,7 @@ function dropdown() {
 
     el.setAttribute('u-dropdown-initialized', '');
     btnEl.addEventListener('click', () => {
-      el.classList.toggle('is-open');
+      el.classList.toggle('is-closed');
     });
 
     if (el.hasAttribute('u-dropdown-form-select')) {

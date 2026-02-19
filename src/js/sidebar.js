@@ -5,6 +5,10 @@ function sidebar() {
 
   const burger = side.querySelector('.side_burger-btn');
   burger.addEventListener('click', () => {
+    let toState = 'open';
+    if (side.classList.contains('is-closed')) toState = 'open';
+    else toState = 'closed';
+
     side.classList.toggle('is-closed');
     sideMenu.classList.remove('is-closed');
     sideMenu.classList.add('is-open');
@@ -19,6 +23,12 @@ function sidebar() {
       sideMenu.classList.add('is-closed');
       sideMenu.classList.remove('is-open');
     }
+  });
+
+  side.addEventListener('click', (e) => {
+    if (side.classList.contains('is-closed')) return;
+    if (!e.target.closest('.side_menu-nav-link,  .side_cs-link, .side_cs-foot-link')) return;
+    burger.click();
   });
 }
 
