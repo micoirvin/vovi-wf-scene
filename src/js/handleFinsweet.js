@@ -1,15 +1,21 @@
 function handleFinsweet() {
   // REFACTOR. MODULARIZE THIS
+  if (!window.isFinsweetLoaded) {
+    window.FinsweetAttributes.destroy();
+    return window.FinsweetAttributes.load('list').then(() => {
+      window.isFinsweetLoaded = true;
+    });
+  }
 
-  const [sideCsPreCleanup, sideCsCleanup] = sideCsCase();
+  // const [sideCsPreCleanup, sideCsCleanup] = sideCsCase();
 
   setTimeout(() => {
-    // window.FinsweetAttributes.destroy();
-    // window.FinsweetAttributes.load('list');
-    sideCsPreCleanup();
+    // sideCsPreCleanup();
 
-    window.FinsweetAttributes.modules.list.restart().then((res) => {
-      sideCsCleanup();
+    window.FinsweetAttributes.destroy();
+    window.FinsweetAttributes.load('list').then((res) => {
+      console.log(res);
+      // sideCsCleanup();
     });
   }, 300);
 }
