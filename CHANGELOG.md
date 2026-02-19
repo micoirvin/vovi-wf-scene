@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.11
+
+### Patch Changes
+
+- eb472ad: disable swiper temp
+
 ## 1.0.10
 
 ### Patch Changes
