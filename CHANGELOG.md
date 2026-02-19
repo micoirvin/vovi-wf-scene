@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.12
+
+### Patch Changes
+
+- 6c8b730: disable sideCs finsweet temp
+
 ## 1.0.11
 
 ### Patch Changes
