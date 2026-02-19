@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.9
+
+### Patch Changes
+
+- 4ab9e16: sidebar logic updates
+
 ## 1.0.8
 
 ### Patch Changes
