@@ -16,6 +16,7 @@
       document.body.append(devScript);
 
       pageLinks.forEach((link) => {
+        if (!link.href) return;
         const url = link.href;
         const updatedUrl = url + '?devMode=true';
         link.href = updatedUrl;
