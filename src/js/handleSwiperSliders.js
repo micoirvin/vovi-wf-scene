@@ -1,4 +1,5 @@
 function handleSwiperSliders() {
+  return;
   const swiperOuters = document.querySelectorAll('[swiper_outer]');
   swiperOuters.forEach((swiperOuter) => handleSingleSwiper(swiperOuter));
 }
