@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.13
+
+### Patch Changes
+
+- 5d466c0: filter + swiper v2
+
 ## 1.0.12
 
 ### Patch Changes
