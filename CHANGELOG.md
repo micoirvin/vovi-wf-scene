@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.14
+
+### Patch Changes
+
+- 8850b5d: remove some console logs
+
 ## 1.0.13
 
 ### Patch Changes
