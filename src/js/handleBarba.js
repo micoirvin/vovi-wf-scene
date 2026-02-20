@@ -1,4 +1,5 @@
 import { init } from './_init';
+import { sideCsOnAfter, sideCsOnBeforeLeave } from './simplifiedSidebarCs';
 
 function handleBarba() {
   if (window.VAR_BARBA) return;
@@ -28,12 +29,17 @@ function handleBarba() {
     ],
   });
 
+  barba.hooks.beforeLeave(() => {
+    sideCsOnBeforeLeave();
+  });
+
   barba.hooks.afterLeave(() => {
     window.scrollTo(0, 0);
     gsap.globalTimeline.clear();
   });
 
   barba.hooks.after(() => {
+    sideCsOnAfter();
     init();
   });
 }

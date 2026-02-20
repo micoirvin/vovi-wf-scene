@@ -1,5 +1,4 @@
 function handleSwiperSliders() {
-  return;
   const swiperOuters = document.querySelectorAll('[swiper_outer]');
   swiperOuters.forEach((swiperOuter) => handleSingleSwiper(swiperOuter));
 }
@@ -13,15 +12,17 @@ function handleSingleSwiper(swiperOuter, reload = false) {
     return console.warn('Swiper for el', swiperEl, 'has been initialized already ');
   }
 
-  if (
-    swiperEl.hasAttribute('dynamic-swiper-list') &&
-    !swiperOuter.hasAttribute('dynamic-swiper-list-is-initialized')
-  ) {
-    swiperOuter = dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper);
-    swiperEls = addClassesToSwiperElements(swiperOuter);
-    swiperEl = swiperEls.swiperEl;
-    swiperWrapper = swiperEls.swiperWrapper;
-  }
+  /*******  TO BE REVIEWED
+  // if (
+  //   swiperEl.hasAttribute('dynamic-swiper-list') &&
+  //   !swiperOuter.hasAttribute('dynamic-swiper-list-is-initialized')
+  // ) {
+  //   swiperOuter = dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper);
+  //   swiperEls = addClassesToSwiperElements(swiperOuter);
+  //   swiperEl = swiperEls.swiperEl;
+  //   swiperWrapper = swiperEls.swiperWrapper;
+  // }
+  ********/
 
   const swiperType = swiperEl.getAttribute('swiper-type') || 'default';
 
@@ -34,15 +35,17 @@ function handleSingleSwiper(swiperOuter, reload = false) {
   const direction = swiperEl?.getAttribute('swiper-direction') ?? 'horizontal';
 
   let gap = 0;
-  if (!swiperWrapper.hasAttribute('swiper-copied-gap')) {
+  if (swiperWrapper.hasAttribute('swiper-copied-gap')) {
+    gap = swiperWrapper.getAttribute('swiper-copied-gap');
+  } else {
     gap = getComputedStyle(swiperWrapper).getPropertyValue('gap');
     if (gap) {
       swiperWrapper.setAttribute('swiper-copied-gap', gap);
     }
-    swiperWrapper.style.gap = '0px';
-  } else gap = swiperWrapper.getAttribute('swiper-copied-gap');
+  }
 
-  swiperWrapper.style.gap = 0;
+  console.log('gap update', gap);
+  swiperWrapper.style.gap = '0px';
 
   const swiperProps = {
     loop: isLoop,
@@ -97,6 +100,8 @@ function handleSingleSwiper(swiperOuter, reload = false) {
   }
 
   if (swiperEl.swiper) swiperEl.swiper.destroy();
+  swiperWrapper.style.gap = '0px';
+
   let swiper = new Swiper(swiperEl, swiperProps);
 }
 
@@ -120,6 +125,7 @@ const addClassesToSwiperElements = (swiperOuter) => {
 };
 
 function dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper) {
+  return;
   const displayClone = swiperOuter.cloneNode(true);
   const key = swiperEl.getAttribute('dynamic-swiper-list');
   attributeCleanupMap(key, displayClone)();
@@ -161,6 +167,7 @@ function dynamicSwiperList(swiperOuter, swiperEl, swiperWrapper) {
 }
 
 function attributeCleanupMap(key, swiperEl) {
+  return;
   let retFunc = null;
   switch (key) {
     case 'fs':
@@ -184,4 +191,4 @@ function attributeCleanupMap(key, swiperEl) {
   return retFunc;
 }
 
-export { handleSwiperSliders };
+export { handleSwiperSliders, handleSingleSwiper };

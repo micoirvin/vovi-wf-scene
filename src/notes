@@ -1,0 +1,1 @@
+Finsweet is not working properly if I try to I dynamically add elements into the DOM. The weird thing is this happens even if Finsweet is loaded with a delay.
