@@ -44,7 +44,6 @@ function handleSingleSwiper(swiperOuter, reload = false) {
     }
   }
 
-  console.log('gap update', gap);
   swiperWrapper.style.gap = '0px';
 
   const swiperProps = {
@@ -100,7 +99,7 @@ function handleSingleSwiper(swiperOuter, reload = false) {
   }
 
   if (swiperEl.swiper) swiperEl.swiper.destroy();
-  swiperWrapper.style.gap = '0px';
+  swiperWrapper.style.gap = '0px'; // should be after destroy
 
   let swiper = new Swiper(swiperEl, swiperProps);
 }

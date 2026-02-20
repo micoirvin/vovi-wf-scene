@@ -11,7 +11,6 @@ function dropdown() {
     el.setAttribute('u-dropdown-initialized', '');
     btnEl.addEventListener('click', () => {
       el.classList.toggle('is-closed');
-      console.log(5);
     });
 
     if (el.hasAttribute('u-dropdown-form-single-select')) {
