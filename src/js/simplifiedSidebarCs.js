@@ -115,6 +115,41 @@ function sideCsOnAfter() {
   window.siteSideCs.reenableUpdates = true;
 }
 
+function syncSideCsAccordionWithMenu() {
+  const menuList = document.querySelector('.side_menu[data-accordion-list="css"]');
+  const csList = document.querySelector('.side_cs [data-accordion-list="css"]');
+  if (!menuList || !csList) return;
+
+  // Only one of menu/side_cs open at a time on desktop (768px+). Below that,
+  // both may be open together — matches the mobile layout's staggered fade-in
+  // for .side_menu and .side_cs rather than an exclusive accordion.
+  const isDesktop = () => window.matchMedia('(min-width: 768px)').matches;
+
+  const closeActiveItems = (list) => {
+    list.querySelectorAll('[data-accordion="active"]').forEach((item) => {
+      item.setAttribute('data-accordion', 'not-active');
+      const toggle = item.querySelector('[data-accordion-toggle]');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      item.dispatchEvent(
+        new CustomEvent('accordion:toggle', { detail: { open: false }, bubbles: true })
+      );
+    });
+  };
+
+  menuList.addEventListener('accordion:toggle', (e) => {
+    menuList.classList.toggle('is-open', e.detail.open);
+    menuList.classList.toggle('is-closed', !e.detail.open);
+  });
+
+  menuList.addEventListener('accordion:toggle', (e) => {
+    if (e.detail.open && isDesktop()) closeActiveItems(csList);
+  });
+
+  csList.addEventListener('accordion:toggle', (e) => {
+    if (e.detail.open && isDesktop()) closeActiveItems(menuList);
+  });
+}
+
 function removeFsAttributes(el) {
   const removeEls = el.querySelectorAll('[fs-list-instance], [fs-list-element]');
   removeEls.forEach((rel) => {
@@ -133,4 +168,4 @@ function replaceChildren(target, source) {
   });
 }
 
-export { prepareSideCs, sideCsOnAfter, sideCsOnBeforeLeave };
+export { prepareSideCs, sideCsOnAfter, sideCsOnBeforeLeave, syncSideCsAccordionWithMenu };

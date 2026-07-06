@@ -12,6 +12,18 @@ function sidebar() {
     side.classList.toggle('is-closed');
     sideMenu.classList.remove('is-closed');
     sideMenu.classList.add('is-open');
+
+    // Also open the menu's own accordion item, since sideMenu's classList
+    // alone no longer drives the nav's visibility (data-accordion-body does).
+    const menuItem = sideMenu.querySelector('[data-accordion]');
+    if (menuItem && menuItem.getAttribute('data-accordion') !== 'active') {
+      menuItem.setAttribute('data-accordion', 'active');
+      const toggle = menuItem.querySelector('[data-accordion-toggle]');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      menuItem.dispatchEvent(
+        new CustomEvent('accordion:toggle', { detail: { open: true }, bubbles: true })
+      );
+    }
   });
 
   const sideMenuHead = sideMenu.querySelector('.side_menu-head');

@@ -3,10 +3,12 @@
 [data-hover='card-image-zoom'] figure {
   overflow: clip;
 }
+
 [data-hover='card-image-zoom'] figure img {
   transform: scale(1);
   transition: transform 0.5s ease-in-out;
 }
+
 [data-hover='card-image-zoom']:hover figure img {
   transform: scale(1.04);
 }
@@ -41,18 +43,21 @@
   opacity: 1;
   pointer-events: auto;
 }
+
 .side_menu.is-closed .side_menu-nav-wrap {
   opacity: 0;
   pointer-events: none;
 }
+
 .side_menu.is-open .pill-button_icon {
   transform: rotate(45deg);
 }
 
 @media screen and (max-width: 767px) {
-  .side.is-closed .side_body > * {
+  .side.is-closed .side_body>* {
     opacity: 0;
   }
+
   .side.is-closed .side_body {
     opacity: 0;
     visibility: hidden;
@@ -64,6 +69,7 @@
       opacity 0.3s ease-out,
       visibility 0.3s ease-out;
   }
+
   .side_menu,
   .side_cs {
     transition: opacity 0.3s ease-out;
@@ -72,19 +78,23 @@
   .side:not(.is-closed) .side_body {
     transition-delay: 0s;
   }
-  .side:not(.is-closed) .side_body > .side_menu {
+
+  .side:not(.is-closed) .side_body>.side_menu {
     transition-delay: 0.2s;
   }
-  .side:not(.is-closed) .side_body > .side_cs {
+
+  .side:not(.is-closed) .side_body>.side_cs {
     transition-delay: 0.4s;
   }
 
-  .side.is-closed .side_body > .side_cs {
+  .side.is-closed .side_body>.side_cs {
     transition-delay: 0s;
   }
-  .side.is-closed .side_body > .side_menu {
+
+  .side.is-closed .side_body>.side_menu {
     transition-delay: 0.2s;
   }
+
   .side.is-closed .side_body {
     transition-delay: 0.5s;
   }
@@ -110,14 +120,12 @@
   grid-row: span 2;
 }
 
-.cs-cards_item:is(:nth-child(8n + 2), :nth-child(8n + 3), :nth-child(8n + 7), :nth-child(8n + 8))
-  .cs-cards_card {
+.cs-cards_item:is(:nth-child(8n + 2), :nth-child(8n + 3), :nth-child(8n + 7), :nth-child(8n + 8)) .cs-cards_card {
   aspect-ratio: 62/57;
 }
 
 @media screen and (max-width: 991px) {
-  .cs-cards_item:is(:nth-child(8n + 2), :nth-child(8n + 3), :nth-child(8n + 7), :nth-child(8n + 8))
-    .cs-cards_card {
+  .cs-cards_item:is(:nth-child(8n + 2), :nth-child(8n + 3), :nth-child(8n + 7), :nth-child(8n + 8)) .cs-cards_card {
     aspect-ratio: 4/5;
   }
 }
@@ -126,8 +134,7 @@
   grid-row: span 1;
 }
 
-.cs-cards_item:is(:nth-child(8n + 1), :nth-child(8n + 4), :nth-child(8n + 5), :nth-child(8n + 6))
-  :is(.cs-cards_card-bg, [class^='overlay']) {
+.cs-cards_item:is(:nth-child(8n + 1), :nth-child(8n + 4), :nth-child(8n + 5), :nth-child(8n + 6)) :is(.cs-cards_card-bg, [class^='overlay']) {
   display: none;
 }
 
@@ -148,25 +155,19 @@
   grid-row: span 2;
 }
 
-.blog_item:is(
-    :nth-child(10n + 3),
-    :nth-child(10n + 4),
-    :nth-child(10n + 8),
-    :nth-child(10n + 9),
-    :nth-child(10n + 10)
-  )
-  .blog_card-fig {
+.blog_item:is( :nth-child(10n + 3),
+  :nth-child(10n + 4),
+  :nth-child(10n + 8),
+  :nth-child(10n + 9),
+  :nth-child(10n + 10)) .blog_card-fig {
   display: none;
 }
 
-.blog_item:is(
-    :nth-child(10n + 3),
-    :nth-child(10n + 4),
-    :nth-child(10n + 8),
-    :nth-child(10n + 9),
-    :nth-child(10n + 10)
-  )
-  .blog_card {
+.blog_item:is( :nth-child(10n + 3),
+  :nth-child(10n + 4),
+  :nth-child(10n + 8),
+  :nth-child(10n + 9),
+  :nth-child(10n + 10)) .blog_card {
   grid-template-rows: auto;
 }
 

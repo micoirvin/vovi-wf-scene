@@ -2,7 +2,7 @@ import { greetUser } from '$utils/greet';
 import { init } from './js/_init';
 import { sidebar } from './js/sidebar';
 import { cycleClock } from './js/cycleClock';
-import { prepareSideCs } from './js/simplifiedSidebarCs';
+import { prepareSideCs, syncSideCsAccordionWithMenu } from './js/simplifiedSidebarCs';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -14,5 +14,6 @@ window.Webflow.push(() => {
   cycleClock();
   sidebar();
   prepareSideCs();
+  syncSideCsAccordionWithMenu();
   init();
 });

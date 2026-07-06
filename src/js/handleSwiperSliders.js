@@ -65,6 +65,14 @@ function handleSingleSwiper(swiperOuter, reload = false) {
           snapOnRelease: false,
         }
       : false,
+    mousewheel: false,
+    freeMode: scrollbarEl
+      ? {
+          enabled: true,
+          sticky: false,
+          momentum: true,
+        }
+      : false,
   };
 
   switch (swiperType) {
@@ -102,6 +110,73 @@ function handleSingleSwiper(swiperOuter, reload = false) {
   swiperWrapper.style.gap = '0px'; // should be after destroy
 
   let swiper = new Swiper(swiperEl, swiperProps);
+
+  if (scrollbarEl) attachSmoothMousewheel(swiperEl, direction);
+}
+
+/**
+ * Eases mousewheel scrolling on a swiper instead of Swiper's built-in mousewheel
+ * module, which jumps directly to a new position on every wheel event and looks
+ * stepped with a normal (non-trackpad) mouse wheel.
+ */
+function attachSmoothMousewheel(swiperEl, direction) {
+  if (swiperEl.dataset.smoothWheelBound) return;
+  swiperEl.dataset.smoothWheelBound = 'true';
+
+  let target = null;
+  let current = null;
+  let rafId = null;
+  let resyncTimeout = null;
+
+  const tick = () => {
+    const { swiper } = swiperEl;
+    if (!swiper || target === null) {
+      rafId = null;
+      return;
+    }
+
+    current += (target - current) * 0.2;
+    const settled = Math.abs(target - current) < 0.5;
+    if (settled) current = target;
+
+    swiper.setTransition(0);
+    swiper.setTranslate(current);
+    swiper.updateProgress(current);
+    swiper.updateActiveIndex();
+    swiper.updateSlidesClasses();
+
+    rafId = settled ? null : requestAnimationFrame(tick);
+  };
+
+  swiperEl.addEventListener(
+    'wheel',
+    (e) => {
+      const { swiper } = swiperEl;
+      if (!swiper) return;
+
+      e.preventDefault();
+
+      const delta = direction === 'vertical' ? e.deltaY : e.deltaY || e.deltaX;
+
+      if (target === null) {
+        target = swiper.translate;
+        current = swiper.translate;
+      }
+
+      target -= delta;
+      const lowerBound = Math.min(swiper.minTranslate(), swiper.maxTranslate());
+      const upperBound = Math.max(swiper.minTranslate(), swiper.maxTranslate());
+      target = Math.min(upperBound, Math.max(lowerBound, target));
+
+      if (!rafId) rafId = requestAnimationFrame(tick);
+
+      clearTimeout(resyncTimeout);
+      resyncTimeout = setTimeout(() => {
+        target = null;
+      }, 200);
+    },
+    { passive: false }
+  );
 }
 
 const addClassesToSwiperElements = (swiperOuter) => {
