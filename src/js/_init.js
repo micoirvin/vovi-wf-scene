@@ -7,7 +7,7 @@ import { globeInteraction } from './globeInteraction';
 import { enableSubmitButton } from './enableButtonSubmit';
 import { dropdown } from './dropdown';
 import { initAccordion } from './accordion';
-import { richtextMap } from './richtextMap';
+import { richtextMap, initStoryScrollSync } from './richtextMap';
 
 function init() {
   gsapLoader();
@@ -20,6 +20,7 @@ function init() {
   dropdown();
   initAccordion();
   richtextMap();
+  initStoryScrollSync();
 }
 
 export { init };
