@@ -21,17 +21,18 @@ export function richtextMap() {
 
     if (!richtext || !blockList || !blockTemplate) return;
 
-    // Build the h3 groups: each h3 with the paragraphs that follow it
+    // Build the h3 groups: each h3 with the content (p, ul, ol) that follows it
     // until the next h3 or the end of the richtext element.
+    const contentTags = ['P', 'UL', 'OL'];
     const groups = [];
     let currentGroup = null;
 
     Array.from(richtext.children).forEach((child) => {
       if (child.tagName === 'H3') {
-        currentGroup = { heading: child, paragraphs: [] };
+        currentGroup = { heading: child, content: [] };
         groups.push(currentGroup);
-      } else if (currentGroup && child.tagName === 'P') {
-        currentGroup.paragraphs.push(child);
+      } else if (currentGroup && contentTags.includes(child.tagName)) {
+        currentGroup.content.push(child);
       }
     });
 
@@ -49,8 +50,8 @@ export function richtextMap() {
       if (titleNum) titleNum.textContent = String(index + 1).padStart(2, '0');
       if (paragraphs) {
         paragraphs.innerHTML = '';
-        group.paragraphs.forEach((p) => {
-          paragraphs.appendChild(p.cloneNode(true));
+        group.content.forEach((el) => {
+          paragraphs.appendChild(el.cloneNode(true));
         });
       }
 
