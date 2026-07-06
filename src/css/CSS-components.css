@@ -100,6 +100,25 @@
   }
 }
 
+.side:not(.is-closed) .side_burger-icon path:nth-child(1) {
+  transform: rotate(-45deg) translateY(-25%);
+}
+
+.side:not(.is-closed) .side_burger-icon path:nth-child(2) {
+  opacity: 0;
+}
+
+.side:not(.is-closed) .side_burger-icon path:nth-child(3) {
+  transform: rotate(45deg) translateY(25%);
+}
+
+.side .side_burger-icon path {
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+  transform-origin: center;
+}
+
 /*
 */
 

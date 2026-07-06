@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.15
+
+### Patch Changes
+
+- 0c3e126: case study rich text map
+
 ## 1.0.14
 
 ### Patch Changes
