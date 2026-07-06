@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.16
+
+### Patch Changes
+
+- 85c16bd: fix for sidebar overflow
+
 ## 1.0.15
 
 ### Patch Changes
