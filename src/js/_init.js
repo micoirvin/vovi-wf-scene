@@ -6,6 +6,7 @@ import { lazyFinsweet } from './lazyFinsweet';
 import { globeInteraction } from './globeInteraction';
 import { enableSubmitButton } from './enableButtonSubmit';
 import { dropdown } from './dropdown';
+import { richtextMap } from './richtextMap';
 
 function init() {
   gsapLoader();
@@ -16,6 +17,7 @@ function init() {
   globeInteraction();
   enableSubmitButton();
   dropdown();
+  richtextMap();
 }
 
 export { init };
