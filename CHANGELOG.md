@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.17
+
+### Patch Changes
+
+- a710aa3: li support for richtext map
+
 ## 1.0.16
 
 ### Patch Changes
