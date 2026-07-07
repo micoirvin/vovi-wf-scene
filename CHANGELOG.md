@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.18
+
+### Patch Changes
+
+- de07dd8: richtext casestudy with image
+
 ## 1.0.17
 
 ### Patch Changes
