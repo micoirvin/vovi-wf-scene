@@ -1,5 +1,11 @@
 # @micoirvin/webflow-dev-starter
 
+## 1.0.19
+
+### Patch Changes
+
+- 49b7ed4: batch updates Willett
+
 ## 1.0.18
 
 ### Patch Changes
