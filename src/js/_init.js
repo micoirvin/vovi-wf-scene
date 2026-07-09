@@ -8,6 +8,7 @@ import { enableSubmitButton } from './enableButtonSubmit';
 import { dropdown } from './dropdown';
 import { initAccordion } from './accordion';
 import { richtextMap, initStoryScrollSync } from './richtextMap';
+import { mergeCsIndiFoot } from './csIndiFoot';
 
 function init() {
   gsapLoader();
@@ -21,6 +22,7 @@ function init() {
   initAccordion();
   richtextMap();
   initStoryScrollSync();
+  mergeCsIndiFoot();
 }
 
 export { init };
