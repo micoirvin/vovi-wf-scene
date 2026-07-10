@@ -153,6 +153,11 @@ function actuallyInitAccordion(accordion) {
     // Click interaction mode (default)
     else {
       accordion.addEventListener('click', (e) => {
+        // A .u-dropdown (e.g. u-dropdown-form-single-select filter) can sit
+        // inside the toggle — clicking it should open the dropdown, not also
+        // toggle the accordion.
+        if (e.target.closest('.u-dropdown')) return;
+
         const toggle = e.target.closest('[data-accordion-toggle]');
         if (!toggle) return;
 
@@ -165,6 +170,8 @@ function actuallyInitAccordion(accordion) {
 
       // Keyboard navigation for accessibility (Enter, Space)
       accordion.addEventListener('keydown', (e) => {
+        if (e.target.closest('.u-dropdown')) return;
+
         const toggle = e.target.closest('[data-accordion-toggle]');
         if (!toggle) return;
 
